@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 /**
  * Hello world!
@@ -21,7 +22,7 @@ public final class App
 
     }
 
-    public static void main( String[] args ) throws IOException
+    public static void main( String[] args ) throws UnknownHostException ,IOException
     {
         // variable to store keyboard input and socket returnvalue
         String keyInput = "", msgRc = "";
@@ -52,9 +53,14 @@ public final class App
                 bos.close();
                 dos.close();
                 sock.close();
+
+            } catch (EOFException e) {
+                e.printStackTrace();
+                sock.close();
             }
         } catch (EOFException e) {
             e.printStackTrace();
+            sock.close();
         }
-    }
+    }  
 }
