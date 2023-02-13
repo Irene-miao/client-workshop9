@@ -12,10 +12,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-/**
- * Hello world!
- *
- */
+
 public final class App 
 {
     private App() {
@@ -24,14 +21,15 @@ public final class App
 
     public static void main( String[] args ) throws UnknownHostException ,IOException
     {
-        // variable to store keyboard input and socket returnvalue
+        // variable to store keyboard input and socket return value
         String keyInput = "", msgRc = "";
 
         // using console to receive input from keyboard
         Console cons = System.console();
 
-        // open a socket to connect to srver on port 1234
+        // open a socket to connect to server on port 1234
         Socket sock = new Socket("localhost", 1234);
+
 
         try (OutputStream os = sock.getOutputStream()) {
             BufferedOutputStream bos = new BufferedOutputStream(os);
@@ -41,7 +39,7 @@ public final class App
                 BufferedInputStream bis = new BufferedInputStream(is);
                 DataInputStream dis = new DataInputStream(bis);
 
-                while (keyInput.equalsIgnoreCase("quit")) {
+                while (!keyInput.equalsIgnoreCase("quit")) {
                     keyInput = cons.readLine("Enter guess number");
                     dos.writeUTF(keyInput);
                     dos.flush();
